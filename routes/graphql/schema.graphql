@@ -5,13 +5,18 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query {
+    # Books
     users: [User!]! @paginate(type: "paginator" model: "App\\User")
     user(id: ID @eq): User @find(model: "App\\User")
 
+    # Books
     books: [Book] @all
     book(id: ID @eq): Book @find
     booksByFeatured(featured: Boolean! @eq): [Book] @all
+    # Custom resolvers
+    booksSearchByAuthor(search: String!): [Book]
 
+    # Categories
     categories: [Category] @all
     category(id: ID @eq): Category @find
 }
